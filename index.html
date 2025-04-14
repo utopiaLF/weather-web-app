@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather - Web App</title>
+
+    <style>
+        body {
+            background-color: #212121;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form">
+        <input type="text" id="cityname">
+        <button id="btn">Search</button>
+    </div>
+
+    <div></div>
+
+    <script>
+        let h1 = document.getElementById('h1');
+        async function weather() {
+            try {
+                const cityname = document.getElementById('cityname').value
+                const key = 'YOUR API KEY HERE'
+                const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${key}&q=${cityname}&aqi=no`);
+                const data = await response.json();
+
+                console.log(data);
+                console.log(`Temp: ${data.location.name} | Weather: ${data.current.temp_c}`);
+                
+            } catch (err) {
+                console.log(err);
+                h1.textContent = err
+            }
+        }
+
+        document.getElementById('btn').addEventListener('click', weather)
+    </script>
+</body>
+</html>
