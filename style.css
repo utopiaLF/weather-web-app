@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Bebas+Neue&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Orbitron:wght@400..900&family=Syncopate:wght@400;700&family=Tilt+Neon&display=swap');
+body{
+    padding: 0;
+    margin: 0;
+    background-color: #255173c3;
+}
+main{
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.form{
+    width: 100%;
+    background-color: #02405968;
+    display: flex;
+    /* justify-content: space-between; */
+    margin-bottom: 20px;
+    color: #FFFFFF;
+    height: 40px;
+    align-items: center;
+    border-radius: 20px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    font-family: "Nunito", sans-serif;
+}
+.mainBox{
+    width: 100%;
+    background-color: #02405968;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.mainBox div:nth-child(1){
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.mainBox div:nth-child(1) h2{
+    color: #FFFFFF;
+    font-family: "Nunito", sans-serif;
+    font-weight: 300;
+}
+.mainBox .weather{
+    padding: 30px 30px 70px 30px;
+}
+.mainBox .weather h1, p{
+    color: #FFFFFF;
+    font-family: "Nunito", sans-serif;
+}
+.mainBox div:nth-child(3){
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    box-sizing: border-box;
+}
+.mainBox div:nth-child(3) div{
+    width: 45%;
+    height: 150px;
+    background-color: #255173;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Nunito", sans-serif;
+}

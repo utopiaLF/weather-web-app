@@ -4,22 +4,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <title>Weather - Web App</title>
-
-    <style>
-        body {
-            background-color: #212121;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="form">
-        <input type="text" id="cityname">
-        <button id="btn">Search</button>
-    </div>
+    <main>
+        <div class="form">
+            <!-- <input type="text" id="cityname">
+            <button id="btn">Search</button> -->
+            <h3><i class="fa-solid fa-location-dot"></i> Uzbekistan, Bukhara</h3>
+        </div>
+    
+        <div class="mainBox">
+            <div>
+                <h2>Tuesday</h2>
+                <h2>12-April 2025</h2>
+            </div>
 
-    <div></div>
+            <div class="weather">
+                <h1>12 <span>&deg;C</span></h1>
+                <p>Clear Sky</p>
+                <p></p>
+            </div>
+
+            <div>
+                <div>
+                    <p><i class="fa-solid fa-temperature-high"></i> Feels like</p>
+                    <p>15 C</p>
+                </div>
+                <div>
+                    <p>Humidity</p>
+                    <p>90%</p>
+                </div>
+                <div>
+                    <p><i class="fa-solid fa-cloud"></i> Clouds</p>
+                    <p>40%</p>
+                </div>
+                <div>
+                    <p><i class="fa-solid fa-wind"></i> Wind</p>
+                    <p>7m/s</p>
+                </div>
+                <div>
+                    <p>Sunsire</p>
+                    <p>6:24</p>
+                </div>
+                <div>
+                    <p>Sunset</p>
+                    <p>19:29</p>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <script>
         let h1 = document.getElementById('h1');
