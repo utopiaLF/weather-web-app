@@ -12,71 +12,118 @@
 <body>
     <main>
         <div class="form">
-            <!-- <input type="text" id="cityname">
-            <button id="btn">Search</button> -->
-            <h3><i class="fa-solid fa-location-dot"></i> Uzbekistan, Bukhara</h3>
+            <!-- <input type="text" id="cityname"> -->
+            <h3><i class="fa-solid fa-location-dot"></i> <span id="location"> </span></h3>
+            <button id="btn" class="geoBtn">Update location</button>
         </div>
     
         <div class="mainBox">
             <div>
-                <h2>Tuesday</h2>
-                <h2>12-April 2025</h2>
+                <h3 id="last_updated"></h3>
+                <h3 id="today"></h3>
             </div>
 
             <div class="weather">
-                <h1>12 <span>&deg;C</span></h1>
-                <p>Clear Sky</p>
-                <p></p>
+                <h1><span id="temp"></span><span>&deg;C</span></h1>
+                <p id="desc"></p>
+                <!-- <img src="" id="icon" alt="Icon"> -->
             </div>
 
             <div>
                 <div>
                     <p><i class="fa-solid fa-temperature-high"></i> Feels like</p>
-                    <p>15 C</p>
+                    <p><span id="feelslike"></span><span>&deg;C</span></p>
                 </div>
                 <div>
-                    <p>Humidity</p>
-                    <p>90%</p>
+                    <p><i class="fa-solid fa-water"></i> Humidity</p>
+                    <p id="humidity"></p>
                 </div>
                 <div>
                     <p><i class="fa-solid fa-cloud"></i> Clouds</p>
-                    <p>40%</p>
+                    <p id="clouds"></p>
                 </div>
                 <div>
                     <p><i class="fa-solid fa-wind"></i> Wind</p>
-                    <p>7m/s</p>
+                    <p id="wind"></p>
+                </div>
+                <!-- <div>
+                    <p><i class="fa-solid fa-sun"></i> Sunsire</p>
+                    <p>00:00</p>
                 </div>
                 <div>
-                    <p>Sunsire</p>
-                    <p>6:24</p>
-                </div>
-                <div>
-                    <p>Sunset</p>
-                    <p>19:29</p>
-                </div>
+                    <p><i class="fa-solid fa-moon"></i> Sunset</p>
+                    <p>00:00</p>
+                </div> -->
             </div>
         </div>
     </main>
 
     <script>
-        let h1 = document.getElementById('h1');
-        async function weather() {
-            try {
-                const cityname = document.getElementById('cityname').value
-                const key = 'YOUR API KEY HERE'
-                const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${key}&q=${cityname}&aqi=no`);
-                const data = await response.json();
+        async function weather(lat, lon) {
+            try{
+                const key = ''
+                    const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${key}&q=${lat},${lon}&aqi=no`);
+                    const data = await response.json();
+        
+                    document.getElementById('location').textContent = `${data.location.country}, ${data.location.region}`
+                    const today = new Date();
+                    const dayName = today.toLocaleDateString('en-US', { weekday: 'long' });
+                    document.getElementById('today').textContent = dayName
+                    document.getElementById('last_updated').textContent = `Last updated: ${data.current.last_updated}`
+                    document.getElementById('temp').textContent = `${data.current.temp_c}`
+                    document.getElementById('desc').textContent = `${data.current.condition.text}`
+                    document.getElementById('feelslike').textContent = `${data.current.feelslike_c}`
+                    document.getElementById('humidity').textContent = `${data.current.humidity}%`
+                    document.getElementById('clouds').textContent = `${data.current.cloud}%`
+                    const windMs = (data.current.wind_mph * 0.44704).toFixed(2)
+                    document.getElementById('wind').textContent = `${windMs}m/s`
 
-                console.log(data);
-                console.log(`Temp: ${data.location.name} | Weather: ${data.current.temp_c}`);
-                
-            } catch (err) {
-                console.log(err);
-                h1.textContent = err
+                    // document.getElementById('btn').style.display = 'none'
+                } catch(error){
+                    alert("Can't access location. Enable GPS to see local weather")
             }
         }
 
-        document.getElementById('btn').addEventListener('click', weather)
+        if(localStorage.getItem('lat') && localStorage.getItem('lon')){
+            // document.getElementById('btn').style.display = 'none'
+            const lat = localStorage.getItem('lat')
+            const lon = localStorage.getItem('lon')
+            weather(lat, lon)
+        } else {
+            navigator.geolocation.getCurrentPosition(
+                function(position){
+                    const lat = position.coords.latitude
+                    const lon = position.coords.longitude
+
+                    localStorage.setItem('lat', lat)
+                    localStorage.setItem('lon', lon)
+
+                    weather(lat, lon)
+                },
+                function(err){
+                    alert("Can't access location. Enable GPS to see local weather")
+                }
+            )
+        }
+
+        function updateGeo(){
+            navigator.geolocation.getCurrentPosition(
+                function(position){
+                    const lat = position.coords.latitude
+                    const lon = position.coords.longitude
+
+                    localStorage.setItem('lat', lat)
+                    localStorage.setItem('lon', lon)
+
+                    weather(lat, lon)
+                },
+                function(err){
+                    alert("Can't access location. Enable GPS to see local weather")
+                }
+            )    
+        }
+
+        document.getElementById('btn').addEventListener('click', updateGeo)
     </script>
 </body>
 </html>
