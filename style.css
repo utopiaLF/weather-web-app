@@ -1,78 +1,113 @@
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Bebas+Neue&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Orbitron:wght@400..900&family=Syncopate:wght@400;700&family=Tilt+Neon&display=swap');
-body{
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
     padding: 0;
     margin: 0;
-    background-color: #255173c3;
+    box-sizing: border-box;
+}
+body{
+    height: 100vh;
+    height: max-content;
+    background-color: #1A1A1D;
     user-select: none;
+    font-family: "Poppins", sans-serif;
+    padding: 10px;
+}
+.warning{
+    display: none;
+}
+.warning.on{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ECEFF1;
+}
+.warning button{
+    width: 250px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #ECEFF1;
+    margin-top: 10px;
+    border-radius: 16px;
+    box-shadow: 0px 0px 6px #6ec1e476;
+    background: radial-gradient(circle at top, #FF8BA733, transparent);
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
 }
 main{
+    display: none;
+}
+main.on{
     width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2px 10px;
-    box-sizing: border-box;
 }
 .form{
     width: 100%;
-    background-color: #02405968;
+    background-color: #2A2A2E;
     display: flex;
-    /* justify-content: space-between; */
-    margin-bottom: 20px;
-    color: #FFFFFF;
-    height: 40px;
+    margin-bottom: 3vh;
+    color: #FCEFF9;
+    height: 7vh;
     align-items: center;
-    border-radius: 20px;
+    border-radius: 16px;
     padding-left: 10px;
     box-sizing: border-box;
-    font-family: "Nunito", sans-serif;
     position: relative;
 }
 .form h3{
     font-weight: 400;
 }
 .form .geoBtn{
-    background-color: #02405998;
-    color: #FFFFFF;
+    background: linear-gradient(135deg, #FF8BA7, #FFC6A0);
+    color: #1A1A1D;
     border: none;
     outline: none;
-    border-radius: 20px;
-    padding: 5px 10px;
+    border-radius: 9999px;
+    padding: 0.5rem 1rem;
     position: absolute;
     right: 10px;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(255, 139, 167, 0.2);
 }
 .mainBox{
     width: 100%;
-    background-color: #02405968;
+    height: 87vh;
+    background-color: #333338;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 20px;
-    padding: 5px 5px 10px 5px;
-    box-sizing: border-box;
+    border-radius: 16px;
+    padding: 7px;
 }
 .mainBox div:nth-child(1){
     width: 100%;
-    /* display: flex; */
-    /* justify-content: space-between; */
+    display: flex;
+    justify-content: space-between;
 }
 .mainBox div:nth-child(1) h3{
-    color: #FFFFFF;
-    font-family: "Nunito", sans-serif;
-    font-weight: 100;
-    /* font-size: 1.3rem; */
+    color: #C9B6C9;
+    font-weight: 200;
+    font-size: 1rem;
 }
 .mainBox .weather{
-    padding: 30px 30px 70px 30px;
+    padding: 13vh;
 }
 .mainBox .weather h1, p{
-    color: #FFFFFF;
-    font-family: "Nunito", sans-serif;
     text-align: center;
+    color: #C9B6C9;
 }
 .mainBox .weather h1{
     font-size: 2.7rem;
+    color: #FCEFF9;
+}
+.mainBox .bottomdatas{
+    gap: 7px;
 }
 .mainBox div:nth-child(3){
     width: 100%;
@@ -80,29 +115,29 @@ main{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 4px;
-    box-sizing: border-box;
 }
 .mainBox div:nth-child(3) div{
-    width: 48%;
-    height: 150px;
-    background-color: #255173;
-    border-radius: 20px;
+    width: 49%;
+    height: 20vh;
+    background-color: #2A2A2E;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-family: "Nunito", sans-serif;
     position: relative;
+    color: #C9B6C9;
 }
 .mainBox div:nth-child(3) div p:nth-child(1){
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     position: absolute;
-    top: 0;
-    left: 15px;
+    top: 10px;
+    left: 10px;
+    color: #C9B6C9;
 }
 .mainBox div:nth-child(3) div p:nth-child(2){
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: 700;
     transform: translateY(30%);
+    color: #FF8BA7;
 }

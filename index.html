@@ -5,15 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <title>Weather - Web App</title>
 </head>
 
 <body>
-    <main>
+    <div class="warning" id="warning">
+        <h1>Can't access location. Enable GPS to see local weather</h1>
+
+        <button onclick="updateGeo()">Get My Location</button>
+        <button onclick="refreshPage()">Refresh</button>
+    </div>
+    <main id="weatherApp">
+
         <div class="form">
-            <!-- <input type="text" id="cityname"> -->
-            <h3><i class="fa-solid fa-location-dot"></i> <span id="location"> </span></h3>
+            <h3><i class="bi bi-geo-alt"></i> <span id="location"> </span></h3>
             <button id="btn" class="geoBtn">Update location</button>
         </div>
     
@@ -26,66 +32,61 @@
             <div class="weather">
                 <h1><span id="temp"></span><span>&deg;C</span></h1>
                 <p id="desc"></p>
-                <!-- <img src="" id="icon" alt="Icon"> -->
             </div>
 
-            <div>
+            <div class="bottomdatas">
                 <div>
-                    <p><i class="fa-solid fa-temperature-high"></i> Feels like</p>
+                    <p><i class="bi bi-thermometer-half"></i> Feels like</p>
                     <p><span id="feelslike"></span><span>&deg;C</span></p>
                 </div>
                 <div>
-                    <p><i class="fa-solid fa-water"></i> Humidity</p>
+                    <p><i class="bi bi-droplet-half"></i> Humidity</p>
                     <p id="humidity"></p>
                 </div>
                 <div>
-                    <p><i class="fa-solid fa-cloud"></i> Clouds</p>
+                    <p><i class="bi bi-clouds"></i> Clouds</p>
                     <p id="clouds"></p>
                 </div>
                 <div>
-                    <p><i class="fa-solid fa-wind"></i> Wind</p>
+                    <p><i class="bi bi-wind"></i> Wind</p>
                     <p id="wind"></p>
                 </div>
-                <!-- <div>
-                    <p><i class="fa-solid fa-sun"></i> Sunsire</p>
-                    <p>00:00</p>
-                </div>
-                <div>
-                    <p><i class="fa-solid fa-moon"></i> Sunset</p>
-                    <p>00:00</p>
-                </div> -->
             </div>
         </div>
     </main>
 
     <script>
+        let warning = document.getElementById('warning');
+        let weatherApp = document.getElementById('weatherApp');
+        
         async function weather(lat, lon) {
             try{
-                const key = ''
+                    weatherApp.classList.add('on')
+                    warning.classList.remove('on')
+                    const key = 'api key here'
                     const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${key}&q=${lat},${lon}&aqi=no`);
                     const data = await response.json();
         
                     document.getElementById('location').textContent = `${data.location.country}, ${data.location.region}`
                     const today = new Date();
                     const dayName = today.toLocaleDateString('en-US', { weekday: 'long' });
-                    document.getElementById('today').textContent = dayName
-                    document.getElementById('last_updated').textContent = `Last updated: ${data.current.last_updated}`
-                    document.getElementById('temp').textContent = `${data.current.temp_c}`
+                    document.getElementById('today').innerHTML = `<i class="bi bi-calendar"></i> ` + dayName
+                    document.getElementById('last_updated').innerHTML = `<i class="bi bi-clock"></i> Last: ${data.current.last_updated}`
+                    document.getElementById('temp').innerHTML = `<i class="bi bi-thermometer-half"></i> ${data.current.temp_c}`
                     document.getElementById('desc').textContent = `${data.current.condition.text}`
-                    document.getElementById('feelslike').textContent = `${data.current.feelslike_c}`
-                    document.getElementById('humidity').textContent = `${data.current.humidity}%`
-                    document.getElementById('clouds').textContent = `${data.current.cloud}%`
+                    document.getElementById('feelslike').innerHTML = `<i class="bi bi-thermometer-half"></i> ${data.current.feelslike_c}`
+                    document.getElementById('humidity').innerHTML = `<i class="bi bi-droplet-half"></i> ${data.current.humidity}%`
+                    document.getElementById('clouds').innerHTML = `<i class="bi bi-clouds"></i> ${data.current.cloud}%`
                     const windMs = (data.current.wind_mph * 0.44704).toFixed(2)
-                    document.getElementById('wind').textContent = `${windMs}m/s`
+                    document.getElementById('wind').innerHTML = `<i class="bi bi-wind"></i> ${windMs}m/s`
 
-                    // document.getElementById('btn').style.display = 'none'
                 } catch(error){
                     alert("Can't access location. Enable GPS to see local weather")
+                    warning.classList.add('on')
             }
         }
 
         if(localStorage.getItem('lat') && localStorage.getItem('lon')){
-            // document.getElementById('btn').style.display = 'none'
             const lat = localStorage.getItem('lat')
             const lon = localStorage.getItem('lon')
             weather(lat, lon)
@@ -102,6 +103,7 @@
                 },
                 function(err){
                     alert("Can't access location. Enable GPS to see local weather")
+                    warning.classList.add('on')
                 }
             )
         }
@@ -119,8 +121,13 @@
                 },
                 function(err){
                     alert("Can't access location. Enable GPS to see local weather")
+                    warning.classList.add('on')
                 }
             )    
+        }
+
+        function refreshPage() {
+            location.reload();
         }
 
         document.getElementById('btn').addEventListener('click', updateGeo)
