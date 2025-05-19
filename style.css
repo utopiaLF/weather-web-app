@@ -23,6 +23,11 @@ body{
     justify-content: center;
     align-items: center;
     color: #ECEFF1;
+    text-align: center;
+}
+.warning h1{
+    font-size: 1.4rem;
+    margin-bottom: 40px;
 }
 .warning button{
     width: 250px;
