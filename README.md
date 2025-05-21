@@ -12,4 +12,4 @@
 
 #### **Live Demo: https://sage-malabi-ac52a7.netlify.app/**
 
-**This project is licensed under the [MIT License](./LICENSE). Have fun!
+**This project is licensed under the [MIT License](./LICENSE). Have fun!**
