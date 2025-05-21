@@ -11,5 +11,6 @@
 ### Note: Mobile-first, but works well on larger screens too
 
 #### **Live Demo: https://sage-malabi-ac52a7.netlify.app/**
+<br>
 
 **This project is licensed under the [MIT License](./LICENSE). Have fun!**
